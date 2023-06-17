@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doom_crazy</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <script>
+        // Inicialização do jogo
+        var canvas = document.getElementById("gameCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // Posição do jogador
+        var playerX = canvas.width / 2;
+        var playerY = canvas.height - 30;
+
+        // Função de desenho do jogador
+        function drawPlayer() {
+            ctx.beginPath();
+            ctx.rect(playerX, playerY, 20, 20);
+            ctx.fillStyle = "#ff0000";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Função principal de desenho do jogo
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawPlayer();
+
+            // Outras lógicas e desenhos do jogo
+
+            requestAnimationFrame(drawGame);
+        }
+
+        // Função de controle do jogador
+        function movePlayer(event) {
+            if (event.keyCode === 37) { // Seta esquerda
+                playerX -= 5;
+            } else if (event.keyCode === 39) { // Seta direita
+                playerX += 5;
+            }
+        }
+
+        // Evento de escuta para movimento do jogador
+        document.addEventListener("keydown", movePlayer);
+
+        // Início do jogo
+        drawGame();
+    </script>
+</body>
+</html>
+
